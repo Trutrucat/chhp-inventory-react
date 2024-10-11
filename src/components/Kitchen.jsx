@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 
-const StoreRoom = () => {
-  const [items, setItems] = useState([
-    { name: 'Bottled Water', quantity: 100 },
-    { name: 'Canned Goods', quantity: 50 },
-    { name: 'Snacks', quantity: 75 },
+const Kitchen = ({ user }) => {
+  const [pantryItems, setPantryItems] = useState([
+    { name: 'Ketchup', quantity: 5 },
+    { name: 'Apricot Jam', quantity: 3 },
+    { name: 'Strawberry Preserves', quantity: 2 },
   ]);
 
   const [newItem, setNewItem] = useState({ name: '', quantity: 0 });
   const [editingItem, setEditingItem] = useState(null);
 
   const handleAddItem = () => {
-    setItems([...items, newItem]);
+    setPantryItems([...pantryItems, newItem]);
     setNewItem({ name: '', quantity: 0 });
   };
 
@@ -20,28 +20,29 @@ const StoreRoom = () => {
   };
 
   const handleSaveEdit = () => {
-    const updatedItems = items.map((item) => {
+    const updatedItems = pantryItems.map((item) => {
       if (item === editingItem) {
         return { ...editingItem, name: newItem.name, quantity: newItem.quantity };
       }
       return item;
     });
-    setItems(updatedItems);
+    setPantryItems(updatedItems);
     setEditingItem(null);
     setNewItem({ name: '', quantity: 0 });
   };
 
   const handleDeleteItem = (item) => {
-    const updatedItems = items.filter((i) => i !== item);
-    setItems(updatedItems);
+    const updatedItems = pantryItems.filter((i) => i !== item);
+    setPantryItems(updatedItems);
   };
 
   return (
     <div>
-      <h1>Store Room</h1>
-      <h2>Items:</h2>
+      <h1>Kitchen</h1>
+      <p>Welcome to the kitchen, {user.name}!</p>
+      <h2>Pantry Items:</h2>
       <ul>
-        {items.map((item, index) => (
+        {pantryItems.map((item, index) => (
           <li key={index}>
             {item.name} - Quantity: {item.quantity}
             <button onClick={() => handleEditItem(item)}>Edit</button>
@@ -49,6 +50,7 @@ const StoreRoom = () => {
           </li>
         ))}
       </ul>
+      <h2>Add New Item:</h2>
       <form>
         <label>
           Name:
@@ -75,4 +77,4 @@ const StoreRoom = () => {
   );
 };
 
-export default StoreRoom;
+export default Kitchen;

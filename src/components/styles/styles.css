@@ -1,0 +1,43 @@
+.quantity-input {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-input button {
+  width: 20px;
+  height: 20px;
+  font-size: 16px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.quantity-input input {
+  width: 40px;
+  height: 20px;
+  font-size: 16px;
+  padding: 0;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.target-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 20px;
+  font-size: 16px;
+  padding: 0;
+  border: none;
+  border-radius: 5px;
+  background-color: #ccc;
+}
+
+.target-quantity span {
+  font-size: 16px;
+  font-weight: bold;
+}
