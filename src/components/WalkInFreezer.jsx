@@ -49,6 +49,7 @@ const WalkInFreezer = () => {
           </li>
         ))}
       </ul>
+      <h2>Add New Item:</h2>
       <form>
         <label>
           Name:

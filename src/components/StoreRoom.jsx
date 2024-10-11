@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './styles/styles.css';
 
 const StoreRoom = () => {
   const [items, setItems] = useState([
@@ -37,40 +38,56 @@ const StoreRoom = () => {
   };
 
   return (
-    <div>
+    <div className="store-room">
       <h1>Store Room</h1>
-      <h2>Items:</h2>
-      <ul>
-        {items.map((item, index) => (
-          <li key={index}>
-            {item.name} - Quantity: {item.quantity}
-            <button onClick={() => handleEditItem(item)}>Edit</button>
-            <button onClick={() => handleDeleteItem(item)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-      <form>
-        <label>
-          Name:
-          <input
-            type="text"
-            value={newItem.name}
-            onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
-          />
-        </label>
-        <label>
-          Quantity:
-          <input
-            type="number"
-            value={newItem.quantity}
-            onChange={(e) => setNewItem({ ...newItem, quantity: e.target.value })}
-          />
-        </label>
-        <button onClick={handleAddItem}>Add Item</button>
-        {editingItem && (
-          <button onClick={handleSaveEdit}>Save Edit</button>
-        )}
-      </form>
+      <div className="item-list">
+        <h2>Items:</h2>
+        <ul>
+          {items.map((item, index) => (
+            <li key={index}>
+              {item.name}
+              <button onClick={() => handleEditItem(item)}>Edit</button>
+              <button onClick={() => handleDeleteItem(item)}>Delete</button>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="quantity-list">
+        <h2>Quantities:</h2>
+        <ul>
+          {items.map((item, index) => (
+            <li key={index}>
+              {item.quantity}
+              <button onClick={() => handleEditItem(item)}>Edit</button>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="add-item-form">
+        <h2>Add New Item:</h2>
+        <form>
+          <label>
+            Name:
+            <input
+              type="text"
+              value={newItem.name}
+              onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
+            />
+          </label>
+          <label>
+            Quantity:
+            <input
+              type="number"
+              value={newItem.quantity}
+              onChange={(e) => setNewItem({ ...newItem, quantity: e.target.value })}
+            />
+          </label>
+          <button onClick={handleAddItem}>Add Item</button>
+          {editingItem && (
+            <button onClick={handleSaveEdit}>Save Edit</button>
+          )}
+        </form>
+      </div>
     </div>
   );
 };
