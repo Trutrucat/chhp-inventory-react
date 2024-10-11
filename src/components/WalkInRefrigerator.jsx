@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import TableComponent from './TableComponent';
 
 const WalkInRefrigerator = ({ user }) => {
   const [items, setItems] = useState([
@@ -37,48 +36,25 @@ const WalkInRefrigerator = ({ user }) => {
     setItems(updatedItems);
   };
 
-  const date = new Date();
-
-  const columns = [
-    {
-      Header: date.toISOString().split('T')[0],
-      accessor: 'date',
-      Cell: () => (
-        <div style={{ width: '100%', textAlign: 'center' }}>
-          {date.toISOString().split('T')[0]}
-        </div>
-      ),
-    },
-    {
-      Header: 'Item',
-      accessor: 'name',
-      Cell: ({ value }) => <div>{value}</div>,
-    },
-    {
-      Header: 'Quantity',
-      accessor: 'quantity',
-      Cell: ({ value }) => <div>{value}</div>,
-    },
-  ];
-
   return (
     <div>
       <h1>Walk-In Refrigerator</h1>
       <p>Welcome to the walk-in refrigerator, {user.name}!</p>
-      <TableComponent columns={columns} data={items} />
       <h2>Add New Item:</h2>
       <form>
-        <label>
+        <label for="name-input">
           Name:
           <input
+            id="name-input"
             type="text"
             value={newItem.name}
             onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
           />
         </label>
-        <label>
+        <label for="quantity-input">
           Quantity:
           <input
+            id="quantity-input"
             type="number"
             value={newItem.quantity}
             onChange={(e) => setNewItem({ ...newItem, quantity: e.target.value })}
@@ -89,6 +65,15 @@ const WalkInRefrigerator = ({ user }) => {
           <button onClick={handleSaveEdit}>Save Edit</button>
         )}
       </form>
+      <ul>
+        {items.map((item, index) => (
+          <li key={index}>
+            {item.name} x {item.quantity}
+            <button onClick={() => handleEditItem(item)}>Edit</button>
+            <button onClick={() => handleDeleteItem(item)}>Delete</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

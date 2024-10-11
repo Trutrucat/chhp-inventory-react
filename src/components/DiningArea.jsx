@@ -9,7 +9,6 @@ const DiningArea = ({ user }) => {
 
   const [editingSupply, setEditingSupply] = useState(null);
   const [newSupply, setNewSupply] = useState({ name: '', quantity: 0 });
-  const [newItem, setNewItem] = useState({ name: '', quantity: 0 });
 
   const handleEditSupply = (supply) => {
     setEditingSupply(supply);
@@ -33,9 +32,9 @@ const DiningArea = ({ user }) => {
   };
 
   const handleAddItem = () => {
-    const updatedSupplies = [...supplies, newItem];
+    const updatedSupplies = [...supplies, newSupply];
     setSupplies(updatedSupplies);
-    setNewItem({ name: '', quantity: 0 });
+    setNewSupply({ name: '', quantity: 0 });
   };
 
   return (
@@ -55,6 +54,7 @@ const DiningArea = ({ user }) => {
                   Name:
                   <input
                     type="text"
+                    id={`edit-supply-name-${index}`}
                     value={newSupply.name}
                     onChange={(e) => setNewSupply({ ...newSupply, name: e.target.value })}
                   />
@@ -63,6 +63,7 @@ const DiningArea = ({ user }) => {
                   Quantity:
                   <input
                     type="number"
+                    id={`edit-supply-quantity-${index}`}
                     value={newSupply.quantity}
                     onChange={(e) => setNewSupply({ ...newSupply, quantity: e.target.value })}
                   />
@@ -73,22 +74,23 @@ const DiningArea = ({ user }) => {
           </li>
         ))}
       </ul>
-      <h2>Add New Item:</h2>
       <form>
         <label>
           Name:
           <input
             type="text"
-            value={newItem.name}
-            onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
+            id="new-item-name"
+            value={newSupply.name}
+            onChange={(e) => setNewSupply({ ...newSupply, name: e.target.value })}
           />
         </label>
         <label>
           Quantity:
           <input
             type="number"
-            value={newItem.quantity}
-            onChange={(e) => setNewItem({ ...newItem, quantity: e.target.value })}
+            id="new-item-quantity"
+            value={newSupply.quantity}
+            onChange={(e) => setNewSupply({ ...newSupply, quantity: e.target.value })}
           />
         </label>
         <button onClick={handleAddItem}>Add Item</button>

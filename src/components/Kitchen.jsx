@@ -54,6 +54,7 @@ const Kitchen = ({ user }) => {
         <label>
           Name:
           <input
+            id="item-name"
             type="text"
             value={newItem.name}
             onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
@@ -62,6 +63,7 @@ const Kitchen = ({ user }) => {
         <label>
           Quantity:
           <input
+            id="item-quantity"
             type="number"
             value={newItem.quantity}
             onChange={(e) => setNewItem({ ...newItem, quantity: e.target.value })}

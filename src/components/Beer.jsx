@@ -54,6 +54,7 @@ const Beer = ({ user }) => {
                 <label>
                   Name:
                   <input
+                    id="beer-name-edit"
                     type="text"
                     value={newBeer.name}
                     onChange={(e) => setNewBeer({ ...newBeer, name: e.target.value })}
@@ -62,6 +63,7 @@ const Beer = ({ user }) => {
                 <label>
                   Quantity:
                   <input
+                    id="beer-quantity-edit"
                     type="number"
                     value={newBeer.quantity}
                     onChange={(e) => setNewBeer({ ...newBeer, quantity: e.target.value })}
@@ -78,6 +80,7 @@ const Beer = ({ user }) => {
         <label>
           Name:
           <input
+            id="beer-name-add"
             type="text"
             value={newItem.name}
             onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
@@ -86,6 +89,7 @@ const Beer = ({ user }) => {
         <label>
           Quantity:
           <input
+            id="beer-quantity-add"
             type="number"
             value={newItem.quantity}
             onChange={(e) => setNewItem({ ...newItem, quantity: e.target.value })}

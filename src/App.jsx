@@ -13,7 +13,6 @@ import StoreRoom from './components/StoreRoom';
 import Beer from './components/Beer';
 import DiningArea from './components/DiningArea';
 import Kitchen from './components/Kitchen';
-import TableComponent from './components/TableComponent';
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser());
@@ -46,8 +45,6 @@ const App = () => {
           </>
         )}
       </Routes>
-
-      <TableComponent />
     </>
   );
 };

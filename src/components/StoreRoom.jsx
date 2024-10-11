@@ -64,30 +64,32 @@ const StoreRoom = () => {
         </ul>
       </div>
       <div className="add-item-form">
-        <h2>Add New Item:</h2>
-        <form>
-          <label>
-            Name:
-            <input
-              type="text"
-              value={newItem.name}
-              onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
-            />
-          </label>
-          <label>
-            Quantity:
-            <input
-              type="number"
-              value={newItem.quantity}
-              onChange={(e) => setNewItem({ ...newItem, quantity: e.target.value })}
-            />
-          </label>
-          <button onClick={handleAddItem}>Add Item</button>
-          {editingItem && (
-            <button onClick={handleSaveEdit}>Save Edit</button>
-          )}
-        </form>
-      </div>
+  <h2>Add New Item:</h2>
+  <form>
+    <label>
+      Name:
+      <input
+        id="item-name"
+        type="text"
+        value={newItem.name}
+        onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
+      />
+    </label>
+    <label>
+      Quantity:
+      <input
+        id="item-quantity"
+        type="number"
+        value={newItem.quantity}
+        onChange={(e) => setNewItem({ ...newItem, quantity: e.target.value })}
+      />
+    </label>
+    <button onClick={handleAddItem}>Add Item</button>
+    {editingItem && (
+      <button onClick={handleSaveEdit}>Save Edit</button>
+    )}
+  </form>
+</div>
     </div>
   );
 };
