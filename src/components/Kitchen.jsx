@@ -39,7 +39,6 @@ const Kitchen = ({ user }) => {
   return (
     <div>
       <h1>Kitchen</h1>
-      <p>Welcome to the kitchen, {user.name}!</p>
       <h2>Pantry Items:</h2>
       <ul>
         {pantryItems.map((item, index) => (

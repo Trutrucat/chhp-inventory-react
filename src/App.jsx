@@ -13,23 +13,20 @@ import StoreRoom from './components/StoreRoom';
 import Beer from './components/Beer';
 import DiningArea from './components/DiningArea';
 import Kitchen from './components/Kitchen';
-import Spreadsheet from './components/Spreadsheet.jsx'; // Import the Spreadsheet component
-
+import TableComponent from './components/TableComponent';
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser());
-
 
   const handleSignout = () => {
     authService.signout()
     setUser(null)
   }
 
-
   return (
     <>
-      <NavBar user={user} handleSignout={handleSignout} /> 
-      <Spreadsheet />
+      <NavBar user={user} handleSignout={handleSignout} />
+      
       <Routes>
         { user ? (
           <>
@@ -49,10 +46,11 @@ const App = () => {
           </>
         )}
       </Routes>
+
+      <TableComponent />
     </>
   );
 };
-
 
 export default App;
 

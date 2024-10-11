@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import TableComponent from './TableComponent';
 
 const WalkInRefrigerator = ({ user }) => {
   const [items, setItems] = useState([
@@ -36,20 +37,35 @@ const WalkInRefrigerator = ({ user }) => {
     setItems(updatedItems);
   };
 
+  const date = new Date();
+
+  const columns = [
+    {
+      Header: date.toISOString().split('T')[0],
+      accessor: 'date',
+      Cell: () => (
+        <div style={{ width: '100%', textAlign: 'center' }}>
+          {date.toISOString().split('T')[0]}
+        </div>
+      ),
+    },
+    {
+      Header: 'Item',
+      accessor: 'name',
+      Cell: ({ value }) => <div>{value}</div>,
+    },
+    {
+      Header: 'Quantity',
+      accessor: 'quantity',
+      Cell: ({ value }) => <div>{value}</div>,
+    },
+  ];
+
   return (
     <div>
       <h1>Walk-In Refrigerator</h1>
       <p>Welcome to the walk-in refrigerator, {user.name}!</p>
-      <h2>Items:</h2>
-      <ul>
-        {items.map((item, index) => (
-          <li key={index}>
-            {item.name} - Quantity: {item.quantity}
-            <button onClick={() => handleEditItem(item)}>Edit</button>
-            <button onClick={() => handleDeleteItem(item)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      <TableComponent columns={columns} data={items} />
       <h2>Add New Item:</h2>
       <form>
         <label>
