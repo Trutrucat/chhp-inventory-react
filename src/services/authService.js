@@ -8,12 +8,11 @@ const signup = async (formData) => {
         body: JSON.stringify(formData),
       });
       const json = await res.json();
-      console.log('Signup response:', json);
       if (json.err) {
         throw new Error(json.err);
       }
       if (json.token) {
-        localStorage.setItem('token', json.token); // add this line to store the JWT token in localStorage
+        localStorage.setItem('token', json.token); 
     
         const user = JSON.parse(atob(json.token.split('.')[1]));
     
@@ -25,9 +24,7 @@ const signup = async (formData) => {
       throw err;
     }
   };
-// authService.js
 
-// src/services/authService.js
 
 const signin = async (user) => {
     try {
@@ -39,7 +36,7 @@ const signin = async (user) => {
       const json = await res.json()
   
       if (json.token) {
-        localStorage.setItem('token', json.token); // add this line to store the JWT token in localStorage
+        localStorage.setItem('token', json.token);
   
         const user = JSON.parse(atob(json.token.split('.')[1]));
   

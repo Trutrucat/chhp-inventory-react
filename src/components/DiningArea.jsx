@@ -10,7 +10,7 @@ const DiningArea = ({ user }) => {
   const [editingSupply, setEditingSupply] = useState(null);
   const [newSupply, setNewSupply] = useState({ name: '', quantity: 0 });
 
-  const handleEditSupply = (supply) => {
+  const handleEditItem = (supply) => {
     setEditingSupply(supply);
     setNewSupply(supply);
   };
@@ -26,7 +26,7 @@ const DiningArea = ({ user }) => {
     setEditingSupply(null);
   };
 
-  const handleDeleteSupply = (supply) => {
+  const handleDeleteItem = (supply) => {
     const updatedSupplies = supplies.filter((s) => s !== supply);
     setSupplies(updatedSupplies);
   };
@@ -46,8 +46,8 @@ const DiningArea = ({ user }) => {
         {supplies.map((supply, index) => (
           <li key={index}>
             {supply.name} - Quantity: {supply.quantity}
-            <button onClick={() => handleEditSupply(supply)}>Edit</button>
-            <button onClick={() => handleDeleteSupply(supply)}>Delete</button>
+            <button className="btn btn-secondary" onClick={() => handleEditItem(item)}>Edit</button>
+            <button className="btn btn-danger" onClick={() => handleDeleteItem(item)}>Delete</button>
             {editingSupply === supply && (
               <form>
                 <label>
@@ -68,7 +68,7 @@ const DiningArea = ({ user }) => {
                     onChange={(e) => setNewSupply({ ...newSupply, quantity: e.target.value })}
                   />
                 </label>
-                <button onClick={handleSaveEdit}>Save Edit</button>
+                <button className="btn btn-success" onClick={handleSaveEdit}>Save Edit</button>
               </form>
             )}
           </li>
@@ -93,7 +93,7 @@ const DiningArea = ({ user }) => {
             onChange={(e) => setNewSupply({ ...newSupply, quantity: e.target.value })}
           />
         </label>
-        <button onClick={handleAddItem}>Add Item</button>
+        <button className="btn btn-primary" onClick={handleAddItem}>Add Item</button>
       </form>
     </div>
   );

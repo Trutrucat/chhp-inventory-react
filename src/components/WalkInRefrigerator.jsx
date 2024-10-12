@@ -60,17 +60,17 @@ const WalkInRefrigerator = ({ user }) => {
             onChange={(e) => setNewItem({ ...newItem, quantity: e.target.value })}
           />
         </label>
-        <button onClick={handleAddItem}>Add Item</button>
+        <button className="btn btn-primary" onClick={handleAddItem}>Add Item</button>
         {editingItem && (
-          <button onClick={handleSaveEdit}>Save Edit</button>
+          <button className="btn btn-success" onClick={handleSaveEdit}>Save Edit</button>
         )}
       </form>
       <ul>
         {items.map((item, index) => (
           <li key={index}>
             {item.name} x {item.quantity}
-            <button onClick={() => handleEditItem(item)}>Edit</button>
-            <button onClick={() => handleDeleteItem(item)}>Delete</button>
+            <button className="btn btn-secondary" onClick={() => handleEditItem(item)}>Edit</button>
+            <button className="btn btn-danger" onClick={() => handleDeleteItem(item)}>Delete</button>
           </li>
         ))}
       </ul>

@@ -46,8 +46,8 @@ const StoreRoom = () => {
           {items.map((item, index) => (
             <li key={index}>
               {item.name}
-              <button onClick={() => handleEditItem(item)}>Edit</button>
-              <button onClick={() => handleDeleteItem(item)}>Delete</button>
+              <button className="btn btn-secondary" onClick={() => handleEditItem(item)}>Edit</button>
+              <button className="btn btn-danger" onClick={() => handleDeleteItem(item)}>Delete</button>
             </li>
           ))}
         </ul>
@@ -58,7 +58,7 @@ const StoreRoom = () => {
           {items.map((item, index) => (
             <li key={index}>
               {item.quantity}
-              <button onClick={() => handleEditItem(item)}>Edit</button>
+              <button className="btn btn-secondary" onClick={handleSaveEdit}>Edit</button>
             </li>
           ))}
         </ul>
@@ -84,9 +84,9 @@ const StoreRoom = () => {
         onChange={(e) => setNewItem({ ...newItem, quantity: e.target.value })}
       />
     </label>
-    <button onClick={handleAddItem}>Add Item</button>
-    {editingItem && (
-      <button onClick={handleSaveEdit}>Save Edit</button>
+    <button className="btn btn-primary" onClick={handleAddItem}>Add Item</button>
+        {editingItem && (
+          <button className="btn btn-success" onClick={handleSaveEdit}>Save Edit</button>
     )}
   </form>
 </div>

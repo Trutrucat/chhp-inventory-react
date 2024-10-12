@@ -1,113 +1,16 @@
-
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
-  padding: 20px;
+.btn {
+  padding: 3px 8px !important;
+  font-size: 12px !important;
 }
-
-.form-grid label {
-  grid-column: 1;
+body {
+  background-color: #f0df81 !important;
+  color: #006400 !important;
 }
-
-.form-grid input {
-  grid-column: 2;
-  width: 100%;
-  height: 30px;
-  padding: 10px;
-  border: 1px solid #ccc;
-}
-
-.form-grid button {
-  grid-column: 1 / -1;
-  width: 100%;
-  height: 30px;
-  background-color: #4CAF50;
-  color: #fff;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.quantity-input {
-  display: flex;
-  align-items: center;
-  flex-basis: 14.28%;
-  margin: 10px;
-}
-
-.quantity-input button {
-  width: 20px;
-  height: 20px;
-  font-size: 16px;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  background-color: #ccc;
-  cursor: pointer;
-}
-
-.quantity-input input {
-  width: 40px;
-  height: 20px;
-  font-size: 16px;
-  padding: 0;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.target-quantity {
-  width: 40px;
-  height: 20px;
-  font-size: 16px;
-  padding: 0;
-  border: none;
-  border-radius: 5px;
-  background-color: #ccc;
-}
-
-.target-quantity span {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.spreadsheet {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 10px;
-  padding: 20px;
-}
-
-.spreadsheet .header {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 10px;
-}
-
-.spreadsheet .header .date-field {
-  font-weight: bold;
-}
-
-.spreadsheet .column {
-  display: grid;
-  grid-template-rows: repeat(5, 1fr);
-  grid-gap: 10px;
-  grid-template-columns: 1fr;
-  grid-column: span 1;
-}
-
-.spreadsheet .column .input-field {
-  padding: 10px;
-  border: 1px solid #ccc;
-}
-
-.spreadsheet .column .input-field input {
-  width: 100%;
-  height: 30px;
-  padding: 10px;
-  border: none;
+body {
+  font-family: 'Hunter Green', sans-serif;
+  color: #006400 !important;
+}h1 {
+  background-color: #F0DF81;
+  font-family: 'Hunter Green', sans-serif;
+  color: #006400;
 }

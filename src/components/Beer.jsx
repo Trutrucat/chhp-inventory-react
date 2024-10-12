@@ -11,7 +11,7 @@ const Beer = ({ user }) => {
   const [newBeer, setNewBeer] = useState({ name: '', quantity: 0 });
   const [newItem, setNewItem] = useState({ name: '', quantity: 0 });
 
-  const handleEditBeer = (beer) => {
+  const handleEditItem = (beer) => {
     setEditingBeer(beer);
     setNewBeer(beer);
   };
@@ -27,7 +27,7 @@ const Beer = ({ user }) => {
     setEditingBeer(null);
   };
 
-  const handleDeleteBeer = (beer) => {
+  const handleDeleteItem = (beer) => {
     const updatedBeers = beers.filter((b) => b !== beer);
     setBeers(updatedBeers);
   };
@@ -47,8 +47,8 @@ const Beer = ({ user }) => {
         {beers.map((beer, index) => (
           <li key={index}>
             {beer.name} - Quantity: {beer.quantity}
-            <button onClick={() => handleEditBeer(beer)}>Edit</button>
-            <button onClick={() => handleDeleteBeer(beer)}>Delete</button>
+            <button className="btn btn-secondary" onClick={() => handleEditItem(item)}>Edit</button>
+            <button className="btn btn-danger" onClick={() => handleDeleteItem(item)}>Delete</button>
             {editingBeer === beer && (
               <form>
                 <label>
@@ -69,7 +69,7 @@ const Beer = ({ user }) => {
                     onChange={(e) => setNewBeer({ ...newBeer, quantity: e.target.value })}
                   />
                 </label>
-                <button onClick={handleSaveEdit}>Save Edit</button>
+                <button className="btn btn-success" onClick={handleSaveEdit}>Save Edit</button>
               </form>
             )}
           </li>
@@ -95,7 +95,7 @@ const Beer = ({ user }) => {
             onChange={(e) => setNewItem({ ...newItem, quantity: e.target.value })}
           />
         </label>
-        <button onClick={handleAddItem}>Add Item</button>
+        <button className="btn btn-primary" onClick={handleAddItem}>Add Item</button>
       </form>
     </div>
   );
