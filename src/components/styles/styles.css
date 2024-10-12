@@ -1,4 +1,4 @@
-/* styles.css */
+
 
 .form-grid {
   display: grid;
@@ -34,7 +34,7 @@
 .quantity-input {
   display: flex;
   align-items: center;
-  flex-basis: 14.28%; /* 7 columns, each taking equal space */
+  flex-basis: 14.28%;
   margin: 10px;
 }
 
