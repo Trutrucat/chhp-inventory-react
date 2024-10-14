@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+console.log('WalkInRefrigerator component loaded');
 
 const WalkInRefrigerator = ({ user }) => {
   const [items, setItems] = useState([
@@ -10,25 +12,33 @@ const WalkInRefrigerator = ({ user }) => {
   const [newItem, setNewItem] = useState({ name: '', quantity: 0 });
   const [editingItem, setEditingItem] = useState(null);
 
-  const handleAddItem = () => {
-    setItems([...items, newItem]);
+  useEffect(() => {
+    console.log('Component re-rendered!');
+  });
+
+  // Log the updated items after each update
+  useEffect(() => {
+    console.log('Updated items:', items);
+  }, [items]);
+
+  const handleAddItem = (e) => {
+    e.preventDefault(); // Prevent form from reloading the page
+    console.log('handleAddItem function called!');
+    console.log('newItem:', newItem);
+    if (newItem.name === '' || newItem.quantity === 0) {
+      console.log('newItem is empty, not adding to list');
+      return;
+    }
+    setItems((prevItems) => {
+      const updatedItems = [...prevItems, newItem];
+      console.log('updatedItems:', updatedItems);
+      return updatedItems;
+    });
     setNewItem({ name: '', quantity: 0 });
   };
 
   const handleEditItem = (item) => {
     setEditingItem(item);
-  };
-
-  const handleSaveEdit = () => {
-    const updatedItems = items.map((item) => {
-      if (item === editingItem) {
-        return { ...editingItem, name: newItem.name, quantity: newItem.quantity };
-      }
-      return item;
-    });
-    setItems(updatedItems);
-    setEditingItem(null);
-    setNewItem({ name: '', quantity: 0 });
   };
 
   const handleDeleteItem = (item) => {
@@ -39,38 +49,41 @@ const WalkInRefrigerator = ({ user }) => {
   return (
     <div>
       <h1>Walk-In Refrigerator</h1>
-      <p>Welcome to the walk-in refrigerator, {user.name}!</p>
+      <p>Welcome to the walk-in refrigerator, {user.username}!</p>
       <h2>Add New Item:</h2>
-      <form>
-        <label for="name-input">
+      <form onSubmit={handleAddItem}>
+        <label htmlFor="name-input">
           Name:
           <input
-            id="name-input"
             type="text"
+            id="name-input"
             value={newItem.name}
             onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
           />
         </label>
-        <label for="quantity-input">
+        <label htmlFor="quantity-input">
           Quantity:
           <input
-            id="quantity-input"
             type="number"
+            id="quantity-input"
             value={newItem.quantity}
-            onChange={(e) => setNewItem({ ...newItem, quantity: e.target.value })}
+            onChange={(e) => setNewItem({ ...newItem, quantity: parseInt(e.target.value) })}
           />
         </label>
-        <button className="btn btn-primary" onClick={handleAddItem}>Add Item</button>
-        {editingItem && (
-          <button className="btn btn-success" onClick={handleSaveEdit}>Save Edit</button>
-        )}
+        <button className="btn btn-primary" type="submit">
+          Add Item
+        </button>
       </form>
       <ul>
-        {items.map((item, index) => (
-          <li key={index}>
+        {items.map((item) => (
+          <li key={item.name}>
             {item.name} x {item.quantity}
-            <button className="btn btn-secondary" onClick={() => handleEditItem(item)}>Edit</button>
-            <button className="btn btn-danger" onClick={() => handleDeleteItem(item)}>Delete</button>
+            <button className="btn btn-secondary" onClick={() => handleEditItem(item)}>
+              Edit
+            </button>
+            <button className="btn btn-danger" onClick={() => handleDeleteItem(item)}>
+              Delete
+            </button>
           </li>
         ))}
       </ul>

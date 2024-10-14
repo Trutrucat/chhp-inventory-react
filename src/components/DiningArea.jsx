@@ -15,15 +15,14 @@ const DiningArea = ({ user }) => {
     setNewSupply(supply);
   };
 
-  const handleSaveEdit = () => {
-    const updatedSupplies = supplies.map((supply) => {
-      if (supply === editingSupply) {
-        return newSupply;
-      }
-      return supply;
-    });
+  const handleSaveEdit = (e) => {
+    e.preventDefault();
+    const updatedSupplies = supplies.map((supply) =>
+      supply === editingSupply ? newSupply : supply
+    );
     setSupplies(updatedSupplies);
     setEditingSupply(null);
+    setNewSupply({ name: '', quantity: 0 });
   };
 
   const handleDeleteItem = (supply) => {
@@ -31,7 +30,8 @@ const DiningArea = ({ user }) => {
     setSupplies(updatedSupplies);
   };
 
-  const handleAddItem = () => {
+  const handleAddItem = (e) => {
+    e.preventDefault();
     const updatedSupplies = [...supplies, newSupply];
     setSupplies(updatedSupplies);
     setNewSupply({ name: '', quantity: 0 });
@@ -46,10 +46,10 @@ const DiningArea = ({ user }) => {
         {supplies.map((supply, index) => (
           <li key={index}>
             {supply.name} - Quantity: {supply.quantity}
-            <button className="btn btn-secondary" onClick={() => handleEditItem(item)}>Edit</button>
-            <button className="btn btn-danger" onClick={() => handleDeleteItem(item)}>Delete</button>
+            <button className="btn btn-secondary" onClick={() => handleEditItem(supply)}>Edit</button>
+            <button className="btn btn-danger" onClick={() => handleDeleteItem(supply)}>Delete</button>
             {editingSupply === supply && (
-              <form>
+              <form onSubmit={handleSaveEdit}>
                 <label>
                   Name:
                   <input
@@ -65,16 +65,16 @@ const DiningArea = ({ user }) => {
                     type="number"
                     id={`edit-supply-quantity-${index}`}
                     value={newSupply.quantity}
-                    onChange={(e) => setNewSupply({ ...newSupply, quantity: e.target.value })}
+                    onChange={(e) => setNewSupply({ ...newSupply, quantity: parseInt(e.target.value) })}
                   />
                 </label>
-                <button className="btn btn-success" onClick={handleSaveEdit}>Save Edit</button>
+                <button className="btn btn-success" type="submit">Save Edit</button>
               </form>
             )}
           </li>
         ))}
       </ul>
-      <form>
+      <form onSubmit={handleAddItem}>
         <label>
           Name:
           <input
@@ -90,10 +90,10 @@ const DiningArea = ({ user }) => {
             type="number"
             id="new-item-quantity"
             value={newSupply.quantity}
-            onChange={(e) => setNewSupply({ ...newSupply, quantity: e.target.value })}
+            onChange={(e) => setNewSupply({ ...newSupply, quantity: parseInt(e.target.value) })}
           />
         </label>
-        <button className="btn btn-primary" onClick={handleAddItem}>Add Item</button>
+        <button className="btn btn-primary" type="submit">Add Item</button>
       </form>
     </div>
   );
