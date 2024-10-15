@@ -1,18 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles/styles.css';
 
+
 const StoreRoom = () => {
-  const [items, setItems] = useState([
-    { name: 'Bottled Water', quantity: 100 },
-    { name: 'Canned Goods', quantity: 50 },
-    { name: 'Snacks', quantity: 75 },
-  ]);
+  const [items, setItems] = useState(() => {
+    const storedItems = localStorage.getItem('store-room-items');
+    return storedItems ? JSON.parse(storedItems) : [
+      { name: 'Bottled Water', quantity: 100 },
+      { name: 'Canned Goods', quantity: 50 },
+      { name: 'Snacks', quantity: 75 },
+    ];
+  });
 
   const [newItem, setNewItem] = useState({ name: '', quantity: 0 });
   const [editingItem, setEditingItem] = useState(null);
 
+
+  useEffect(() => {
+    localStorage.setItem('store-room-items', JSON.stringify(items));
+  }, [items]);
+
+
   const handleAddItem = (e) => {
-    e.preventDefault(); // Prevent page reload
+    e.preventDefault(); 
     if (newItem.name === '' || newItem.quantity <= 0) {
       console.log('Invalid input, cannot add item.');
       return;
@@ -21,13 +31,15 @@ const StoreRoom = () => {
     setNewItem({ name: '', quantity: 0 });
   };
 
+
   const handleEditItem = (item) => {
     setEditingItem(item);
-    setNewItem(item); // Pre-fill the form with the selected item details for editing
+    setNewItem(item); 
   };
 
+
   const handleSaveEdit = (e) => {
-    e.preventDefault(); // Prevent page reload
+    e.preventDefault(); 
     const updatedItems = items.map((item) =>
       item === editingItem ? { ...editingItem, name: newItem.name, quantity: newItem.quantity } : item
     );
@@ -36,10 +48,12 @@ const StoreRoom = () => {
     setNewItem({ name: '', quantity: 0 });
   };
 
+
   const handleDeleteItem = (item) => {
     const updatedItems = items.filter((i) => i !== item);
     setItems(updatedItems);
   };
+
 
   return (
     <div className="store-room">
@@ -49,25 +63,12 @@ const StoreRoom = () => {
         <ul>
           {items.map((item, index) => (
             <li key={index}>
-              {item.name}
+              {item.name} - Quantity: {item.quantity}
               <button className="btn btn-secondary" onClick={() => handleEditItem(item)}>
                 Edit
               </button>
               <button className="btn btn-danger" onClick={() => handleDeleteItem(item)}>
                 Delete
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="quantity-list">
-        <h2>Quantities:</h2>
-        <ul>
-          {items.map((item, index) => (
-            <li key={index}>
-              {item.quantity}
-              <button className="btn btn-secondary" onClick={() => handleEditItem(item)}>
-                Edit
               </button>
             </li>
           ))}
@@ -113,5 +114,6 @@ const StoreRoom = () => {
     </div>
   );
 };
+
 
 export default StoreRoom;

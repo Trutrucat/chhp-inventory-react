@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
 
 const WalkInFreezer = () => {
-  const [items, setItems] = useState([
-    { name: 'Frozen Chicken', quantity: 20 },
-    { name: 'Frozen Fish', quantity: 15 },
-    { name: 'Frozen Vegetables', quantity: 30 },
-  ]);
+  const [items, setItems] = useState(() => {
+    const storedItems = localStorage.getItem('items');
+    return storedItems ? JSON.parse(storedItems) : [
+      { name: 'Frozen Chicken', quantity: 20 },
+      { name: 'Frozen Fish', quantity: 15 },
+      { name: 'Frozen Vegetables', quantity: 30 },
+    ];
+  });
 
   const [newItem, setNewItem] = useState({ name: '', quantity: 0 });
   const [editingItem, setEditingItem] = useState(null);
 
   useEffect(() => {
     console.log('Walk-In Freezer items updated:', items);
+    localStorage.setItem('items', JSON.stringify(items));
   }, [items]);
 
   const handleAddItem = (e) => {
-    e.preventDefault(); // Prevent page reload
+    e.preventDefault(); 
     console.log('Adding new item:', newItem);
     if (newItem.name === '' || newItem.quantity <= 0) {
       console.log('Invalid item input, not adding.');
@@ -27,11 +31,11 @@ const WalkInFreezer = () => {
 
   const handleEditItem = (item) => {
     setEditingItem(item);
-    setNewItem(item); // Pre-populate form with selected item details for editing
+    setNewItem(item); 
   };
 
   const handleSaveEdit = (e) => {
-    e.preventDefault(); // Prevent page reload
+    e.preventDefault(); 
     const updatedItems = items.map((item) =>
       item === editingItem ? { ...editingItem, name: newItem.name, quantity: newItem.quantity } : item
     );

@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
 
 const Kitchen = ({ user }) => {
-  const [pantryItems, setPantryItems] = useState([
-    { name: 'Ketchup', quantity: 5 },
-    { name: 'Apricot Jam', quantity: 3 },
-    { name: 'Strawberry Preserves', quantity: 2 },
-  ]);
+  const [pantryItems, setPantryItems] = useState(() => {
+    const storedPantryItems = localStorage.getItem('kitchen-pantry-items');
+    return storedPantryItems ? JSON.parse(storedPantryItems) : [
+      { name: 'Ketchup', quantity: 5 },
+      { name: 'Apricot Jam', quantity: 3 },
+      { name: 'Strawberry Preserves', quantity: 2 },
+    ];
+  });
 
   const [newItem, setNewItem] = useState({ name: '', quantity: 0 });
   const [editingItem, setEditingItem] = useState(null);
 
   useEffect(() => {
     console.log('Pantry items updated:', pantryItems);
+    localStorage.setItem('kitchen-pantry-items', JSON.stringify(pantryItems));
   }, [pantryItems]);
 
   const handleAddItem = (e) => {
-    e.preventDefault(); // Prevent page reload
+    e.preventDefault(); 
     console.log('Adding new item:', newItem);
     if (newItem.name === '' || newItem.quantity <= 0) {
       console.log('Invalid item input, not adding.');
@@ -27,11 +31,11 @@ const Kitchen = ({ user }) => {
 
   const handleEditItem = (item) => {
     setEditingItem(item);
-    setNewItem(item); // Pre-populate form with selected item details for editing
+    setNewItem(item); 
   };
 
   const handleSaveEdit = (e) => {
-    e.preventDefault(); // Prevent page reload
+    e.preventDefault(); 
     const updatedItems = pantryItems.map((item) =>
       item === editingItem ? { ...editingItem, name: newItem.name, quantity: newItem.quantity } : item
     );

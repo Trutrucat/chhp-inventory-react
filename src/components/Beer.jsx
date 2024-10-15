@@ -1,20 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 
 const Beer = ({ user }) => {
-  const [beers, setBeers] = useState([
-    { name: 'Coors (24pk)', quantity: 10 },
-    { name: 'Corona (24pk)', quantity: 8 },
-    { name: 'Modelo (24pk)', quantity: 12 },
-  ]);
+  const [beers, setBeers] = useState(() => {
+    const storedBeers = localStorage.getItem('beers');
+    return storedBeers ? JSON.parse(storedBeers) : [
+      { name: 'Coors (24pk)', quantity: 10 },
+      { name: 'Corona (24pk)', quantity: 8 },
+      { name: 'Modelo (24pk)', quantity: 12 },
+    ];
+  });
 
   const [editingBeer, setEditingBeer] = useState(null);
   const [newBeer, setNewBeer] = useState({ name: '', quantity: 0 });
   const [newItem, setNewItem] = useState({ name: '', quantity: 0 });
 
+
+  useEffect(() => {
+    localStorage.setItem('beers', JSON.stringify(beers));
+  }, [beers]);
+
+
   const handleEditItem = (beer) => {
     setEditingBeer(beer);
-    setNewBeer(beer); // Pre-fills the form with the beer's data for editing
+    setNewBeer(beer); 
   };
+
 
   const handleSaveEdit = (e) => {
     e.preventDefault();
@@ -26,10 +37,12 @@ const Beer = ({ user }) => {
     setNewBeer({ name: '', quantity: 0 });
   };
 
+
   const handleDeleteItem = (beer) => {
     const updatedBeers = beers.filter((b) => b !== beer);
     setBeers(updatedBeers);
   };
+
 
   const handleAddItem = (e) => {
     e.preventDefault();
@@ -37,6 +50,7 @@ const Beer = ({ user }) => {
     setBeers(updatedBeers);
     setNewItem({ name: '', quantity: 0 });
   };
+
 
   return (
     <div>
@@ -100,5 +114,6 @@ const Beer = ({ user }) => {
     </div>
   );
 };
+
 
 export default Beer;

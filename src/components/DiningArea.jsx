@@ -1,19 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 
 const DiningArea = ({ user }) => {
-  const [supplies, setSupplies] = useState([
-    { name: 'Hot Cups (12 oz)', quantity: 50 },
-    { name: 'Cold Cups (22 oz)', quantity: 30 },
-    { name: 'Cup Lids', quantity: 100 },
-  ]);
+  const [supplies, setSupplies] = useState(() => {
+    const storedSupplies = localStorage.getItem('dining-area-supplies');
+    return storedSupplies ? JSON.parse(storedSupplies) : [
+      { name: 'Hot Cups (12 oz)', quantity: 50 },
+      { name: 'Cold Cups (22 oz)', quantity: 30 },
+      { name: 'Cup Lids', quantity: 100 },
+    ];
+  });
 
   const [editingSupply, setEditingSupply] = useState(null);
   const [newSupply, setNewSupply] = useState({ name: '', quantity: 0 });
+
+
+  useEffect(() => {
+    localStorage.setItem('dining-area-supplies', JSON.stringify(supplies));
+  }, [supplies]);
+
 
   const handleEditItem = (supply) => {
     setEditingSupply(supply);
     setNewSupply(supply);
   };
+
 
   const handleSaveEdit = (e) => {
     e.preventDefault();
@@ -25,10 +36,12 @@ const DiningArea = ({ user }) => {
     setNewSupply({ name: '', quantity: 0 });
   };
 
+
   const handleDeleteItem = (supply) => {
     const updatedSupplies = supplies.filter((s) => s !== supply);
     setSupplies(updatedSupplies);
   };
+
 
   const handleAddItem = (e) => {
     e.preventDefault();
@@ -36,6 +49,7 @@ const DiningArea = ({ user }) => {
     setSupplies(updatedSupplies);
     setNewSupply({ name: '', quantity: 0 });
   };
+
 
   return (
     <div>
@@ -98,5 +112,6 @@ const DiningArea = ({ user }) => {
     </div>
   );
 };
+
 
 export default DiningArea;

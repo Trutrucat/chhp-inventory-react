@@ -3,11 +3,14 @@ import React, { useState, useEffect } from 'react';
 console.log('WalkInRefrigerator component loaded');
 
 const WalkInRefrigerator = ({ user }) => {
-  const [items, setItems] = useState([
-    { name: 'Milk', quantity: 5 },
-    { name: 'Eggs', quantity: 12 },
-    { name: 'Butter', quantity: 3 },
-  ]);
+  const [items, setItems] = useState(() => {
+    const storedItems = localStorage.getItem('walk-in-refrigerator-items');
+    return storedItems ? JSON.parse(storedItems) : [
+      { name: 'Milk', quantity: 5 },
+      { name: 'Eggs', quantity: 12 },
+      { name: 'Butter', quantity: 3 },
+    ];
+  });
 
   const [newItem, setNewItem] = useState({ name: '', quantity: 0 });
   const [editingItem, setEditingItem] = useState(null);
@@ -16,13 +19,14 @@ const WalkInRefrigerator = ({ user }) => {
     console.log('Component re-rendered!');
   });
 
-  // Log the updated items after each update
+
   useEffect(() => {
     console.log('Updated items:', items);
+    localStorage.setItem('walk-in-refrigerator-items', JSON.stringify(items));
   }, [items]);
 
   const handleAddItem = (e) => {
-    e.preventDefault(); // Prevent form from reloading the page
+    e.preventDefault(); 
     console.log('handleAddItem function called!');
     console.log('newItem:', newItem);
     if (newItem.name === '' || newItem.quantity === 0) {
