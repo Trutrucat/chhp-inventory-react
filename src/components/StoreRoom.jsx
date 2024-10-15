@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './styles/styles.css';
+import "../styles/styles.css";
 
 
 const StoreRoom = () => {

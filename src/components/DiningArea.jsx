@@ -40,8 +40,8 @@ const DiningArea = ({ user }) => {
   const handleDeleteItem = (supply) => {
     const updatedSupplies = supplies.filter((s) => s !== supply);
     setSupplies(updatedSupplies);
-  };
-
+   };
+  
 
   const handleAddItem = (e) => {
     e.preventDefault();
