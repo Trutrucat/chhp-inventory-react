@@ -20,7 +20,6 @@ const Kitchen = ({ user }) => {
 
   const handleAddItem = (e) => {
     e.preventDefault(); 
-    console.log('Adding new item:', newItem);
     if (newItem.name === '' || newItem.quantity <= 0) {
       console.log('Invalid item input, not adding.');
       return;

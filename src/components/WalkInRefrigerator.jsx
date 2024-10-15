@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-console.log('WalkInRefrigerator component loaded');
 
 const WalkInRefrigerator = ({ user }) => {
   const [items, setItems] = useState(() => {
@@ -15,20 +14,14 @@ const WalkInRefrigerator = ({ user }) => {
   const [newItem, setNewItem] = useState({ name: '', quantity: 0 });
   const [editingItem, setEditingItem] = useState(null);
 
-  useEffect(() => {
-    console.log('Component re-rendered!');
-  });
 
 
   useEffect(() => {
-    console.log('Updated items:', items);
     localStorage.setItem('walk-in-refrigerator-items', JSON.stringify(items));
   }, [items]);
 
   const handleAddItem = (e) => {
     e.preventDefault(); 
-    console.log('handleAddItem function called!');
-    console.log('newItem:', newItem);
     if (newItem.name === '' || newItem.quantity === 0) {
       console.log('newItem is empty, not adding to list');
       return;

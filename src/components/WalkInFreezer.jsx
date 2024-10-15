@@ -14,13 +14,11 @@ const WalkInFreezer = () => {
   const [editingItem, setEditingItem] = useState(null);
 
   useEffect(() => {
-    console.log('Walk-In Freezer items updated:', items);
     localStorage.setItem('items', JSON.stringify(items));
   }, [items]);
 
   const handleAddItem = (e) => {
     e.preventDefault(); 
-    console.log('Adding new item:', newItem);
     if (newItem.name === '' || newItem.quantity <= 0) {
       console.log('Invalid item input, not adding.');
       return;
