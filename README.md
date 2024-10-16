@@ -8,7 +8,7 @@ CHHP Inventory App is a project I have started to make for my current employer. 
 I would like to do a lot more with the styling. I would like to add a pheasant logo at the bottom of each page as well as implement a grid system that looks like a spreadsheet for the items. I would also like to add a target quantity along with the current quantity. I would like to make an admin user who has access to all of the information as well as reordering information. I would like to make it so that only the admin can add or delete items and the rest of the users can only edit quantities.
 
 ## Technoligies Used
-javascript, mongoose, json, express, mongoDB
+javascript, mongoose, json, express, mongoDB, react, bootstrap
 
 ## Researched
 -Google
@@ -17,4 +17,5 @@ javascript, mongoose, json, express, mongoDB
 -SheCodes
 -MDN documentation
 -mongoosejs documentation
+-bootstrap documentation
 
